@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: order-service
-          image: ashrafelshazlii/order_service:v1.0
+          image: ashrafelshazlii/order-service
           ports:
             - containerPort: 8002
           env:

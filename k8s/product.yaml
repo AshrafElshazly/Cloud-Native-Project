@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: product-service
-          image: ashrafelshazlii/product_service:v1.0
+          image: ashrafelshazlii/product-service
           ports:
             - containerPort: 8001
           env:

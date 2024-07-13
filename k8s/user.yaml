@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: user-service
-          image: ashrafelshazlii/user_service:v1.0
+          image: ashrafelshazlii/user-service
           ports:
             - containerPort: 8000
           env:
