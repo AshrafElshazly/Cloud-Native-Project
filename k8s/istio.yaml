@@ -50,11 +50,9 @@ spec:
 
   - match:
     - uri:
-        regex: /api/user/\d+
+        regex: /api/user/(\d+)
     rewrite:
-      uriRegexRewrite:
-        match: /api/user/(\d+)
-        rewrite: /user/\1
+      uri: /user/{match[1]}
     route:
     - destination:
         host: user-service
@@ -85,11 +83,9 @@ spec:
 
   - match:
     - uri:
-        regex: /api/product/\d+
+        regex: /api/product/(\d+)
     rewrite:
-      uriRegexRewrite:
-        match: /api/product/(\d+)
-        rewrite: /product/\1
+      uri: /product/{match[1]}
     route:
     - destination:
         host: product-service
@@ -120,11 +116,9 @@ spec:
 
   - match:
     - uri:
-        regex: /api/order/\d+
+        regex: /api/order/(\d+)
     rewrite:
-      uriRegexRewrite:
-        match: /api/order/(\d+)
-        rewrite: /order/\1
+      uri: /order/{match[1]}
     route:
     - destination:
         host: order-service
