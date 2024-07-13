@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: my-gateway
+  name: cloudnative-gateway
 spec:
   selector:
     istio: ingressgateway
@@ -18,37 +18,119 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: frontend-service
+  name: cloudnative-vs
 spec:
   hosts:
   - "*"
   gateways:
-  - my-gateway
+  - cloudnative-gateway
   http:
+
   - match:
     - uri:
         prefix: /api/users
+    rewrite:
+      uri: /users
     route:
     - destination:
         host: user-service
         port:
           number: 8000
+
+  - match:
+    - uri:
+        prefix: /api/user
+    rewrite:
+      uri: /user
+    route:
+    - destination:
+        host: user-service
+        port:
+          number: 8000
+
+  - match:
+    - uri:
+        regex: /api/user/\d+
+    rewrite:
+      uriRegexRewrite:
+        match: /api/user/(\d+)
+        rewrite: /user/\1
+    route:
+    - destination:
+        host: user-service
+        port:
+          number: 8000
+
   - match:
     - uri:
         prefix: /api/products
+    rewrite:
+      uri: /products
     route:
     - destination:
         host: product-service
         port:
           number: 8001
+
+  - match:
+    - uri:
+        prefix: /api/product
+    rewrite:
+      uri: /product
+    route:
+    - destination:
+        host: product-service
+        port:
+          number: 8001
+
+  - match:
+    - uri:
+        regex: /api/product/\d+
+    rewrite:
+      uriRegexRewrite:
+        match: /api/product/(\d+)
+        rewrite: /product/\1
+    route:
+    - destination:
+        host: product-service
+        port:
+          number: 8001
+
   - match:
     - uri:
         prefix: /api/orders
+    rewrite:
+      uri: /orders
     route:
     - destination:
         host: order-service
         port:
           number: 8002
+
+  - match:
+    - uri:
+        prefix: /api/order
+    rewrite:
+      uri: /order
+    route:
+    - destination:
+        host: order-service
+        port:
+          number: 8002
+
+  - match:
+    - uri:
+        regex: /api/order/\d+
+    rewrite:
+      uriRegexRewrite:
+        match: /api/order/(\d+)
+        rewrite: /order/\1
+    route:
+    - destination:
+        host: order-service
+        port:
+          number: 8002
+
   - match:
     - uri:
         prefix: /
