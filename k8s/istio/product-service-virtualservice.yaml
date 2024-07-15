@@ -1,0 +1,40 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: product-service-virtualservice
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - cloudnative-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /api/products
+    rewrite:
+      uri: /products
+    route:
+    - destination:
+        host: product-service
+        port:
+          number: 8001
+  - match:
+    - uri:
+        prefix: /api/product
+    rewrite:
+      uri: /product
+    route:
+    - destination:
+        host: product-service
+        port:
+          number: 8001
+  - match:
+    - uri:
+        regex: /api/product/(\d+)
+    rewrite:
+      uri: /product/{match[1]}
+    route:
+    - destination:
+        host: product-service
+        port:
+          number: 8001
