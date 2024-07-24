@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: "{{ include "order-service.fullname" . }}"
+spec:
+  selector:
+    app: "{{ include "order-service.name" . }}"
+  ports:
+    - name: "{{ .Values.service.name }}"
+      protocol: TCP
+      port: {{ .Values.service.port }}
+      targetPort: 8002

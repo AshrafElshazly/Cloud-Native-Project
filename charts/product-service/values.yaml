@@ -1,0 +1,20 @@
+replicaCount: 2
+
+image:
+  repository: ashrafelshazlii/product-service
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  name: http-product
+  type: ClusterIP
+  port: 8001
+
+resources: {}
+
+env:
+  DB_HOST: localhost
+  DB_PORT: 5432
+  DB_NAME: cloudnative
+  DB_USER: user
+  DB_PASSWORD: password

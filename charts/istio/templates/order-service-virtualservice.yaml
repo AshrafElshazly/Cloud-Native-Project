@@ -1,0 +1,40 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: order-service-virtualservice
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - {{ .Values.gateway.name }}
+  http:
+  - match:
+    - uri:
+        prefix: /api/orders
+    rewrite:
+      uri: /orders
+    route:
+    - destination:
+        host: {{ .Values.orderService.host }}
+        port:
+          number: {{ .Values.orderService.port }}
+  - match:
+    - uri:
+        prefix: /api/order
+    rewrite:
+      uri: /order
+    route:
+    - destination:
+        host: {{ .Values.orderService.host }}
+        port:
+          number: {{ .Values.orderService.port }}
+  - match:
+    - uri:
+        regex: /api/order/(\d+)
+    rewrite:
+      uri: /order/{match[1]}
+    route:
+    - destination:
+        host: {{ .Values.orderService.host }}
+        port:
+          number: {{ .Values.orderService.port }}

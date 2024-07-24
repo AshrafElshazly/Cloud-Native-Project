@@ -1,0 +1,18 @@
+gateway:
+  name: cloudnative-gateway
+
+frontendService:
+  host: frontend-service
+  port: 80
+
+orderService:
+  host: order-service
+  port: 8002
+
+productService:
+  host: product-service
+  port: 8001
+
+userService:
+  host: user-service
+  port: 8000

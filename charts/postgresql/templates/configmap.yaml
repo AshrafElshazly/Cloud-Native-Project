@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgresql-configmap
+data:
+  DB_HOST: "{{ .Values.configmap.DB_HOST }}"
+  DB_PORT: "{{ .Values.configmap.DB_PORT }}"
+  DB_NAME: "{{ .Values.configmap.DB_NAME }}"

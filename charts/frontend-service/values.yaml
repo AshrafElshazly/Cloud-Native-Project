@@ -1,0 +1,13 @@
+replicaCount: 2
+
+image:
+  repository: ashrafelshazlii/frontend-service
+  tag: v1
+  pullPolicy: IfNotPresent
+
+service:
+  name: http-frontend
+  type: ClusterIP
+  port: 80
+
+resources: {}
